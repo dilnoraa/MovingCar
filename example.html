@@ -1,165 +1,143 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<style>
-body {
-margin: 0px;
-padding: 0px;
-}
-</style>
-</head>
-<body bgcolor="gray">
-
-<canvas id="myCanvas" width="978" height="300"></canvas>
-<h1 id="mySayac"></h1>
-
-
-<script>
-
-var canvas = document.getElementById('myCanvas');
-var context = canvas.getContext('2d');
-
-context.font = '20pt Calibri';
-context.fillStyle = 'white';
-context.fillText('Araba Hareketi', 250, 30);
-
-context.beginPath();
-context.moveTo(0, 50);
-context.lineTo(970, 50);
-context.lineWidth = 5;
-context.strokeStyle = '#ff9010';
-context.stroke();
-
-var context2 = canvas.getContext('2d');
-
-context2.beginPath();
-context2.moveTo(0, 250);
-context2.lineTo(970, 250);
-context.lineWidth = 5;
-context2.strokeStyle = '#ff9000';
-context2.stroke();
-
-  window.requestAnimFrame = (function(callback) {
-    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
-    function(callback) {
-      window.setTimeout(callback, 1000 / 60);
-     };
-    })();
-
-   function drawRect(myRectangle, context) {
-        context.beginPath();
-        context.rect(myRectangle.x, myRectangle.y, myRectangle.width, myRectangle.height);
-        context.fillStyle = '#8ED6FF';
-        context.fill();
-        context.lineWidth = myRectangle.borderWidth;
-        context.strokeStyle = 'black';
-        context.stroke();
-    }
-   function animate(lastTime, myRectangle, runAnimation, canvas, context) {
-        if(runAnimation.value) {
-
-        var time = (new Date()).getTime();
-        var timeDiff = time - lastTime;
-
-        var linearSpeed = 100;
-        var linearDistEachFrame = linearSpeed * timeDiff / 1000;
-        var currentX = myRectangle.x;
-
-        if(currentX < canvas.width - myRectangle.width - myRectangle.borderWidth / 2) {
-        var newX = currentX + linearDistEachFrame;
-        myRectangle.x = newX;
-      }
-
-// clear
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-// draw
-        drawRect(myRectangle, context);
-        drawRect(myRectangle1, context);
-        drawRect(myRectangle_1, context);
-        drawRect(myRectangle2, context);
-        drawRect(myRectangle_2, context);
-// request new frame
-        requestAnimFrame(function() {
-        animate(time, myRectangle, runAnimation, canvas, context);
-     });
-
- 
-    }
-  }
-        var canvas = document.getElementById('myCanvas');
-        var context = canvas.getContext('2d');
-
-        var myRectangle = {
-        x: 0,
-        y: 130,
-        width: 100,
-        height: 50,
-        borderWidth: 5
-       };
-
-
-
-       var myRectangle1 = {
-         x: 0,
-         y: 80,
-         width: 110,
-         height: 140,
-         borderWidth: 10
-       };
-
-      var myRectangle_1 = {
-         x: 106,
-         y: 121,
-         width: 9,
-         height: 60,
-         borderWidth: 1
-      };
-
-      var myRectangle2 = {
-        x: 860,
-        y: 80,
-        width: 110,
-        height: 140,
-        borderWidth: 10
-     };
-
-      var myRectangle_2 = {
-        x: 854,
-        y: 121,
-        width: 9,
-        height: 60,
-        borderWidth: 1
-     };
-
-// ne zaman hareket ettiğini anlamak için boolean degişkeni kullanılır
-      var runAnimation = {
-       value: false
-      };
-
-      var sayac = 0;
-
-// add click listener to canvas
-      document.getElementById('myCanvas').addEventListener('click', function() {
-// flip flag
-      runAnimation.value = !runAnimation.value;
-
-//hareket etmeye başladığında
-      if(runAnimation.value) {
-
-       sayac = sayac + 1;
-       document.getElementById("mySayac").innerHTML = "Araba'nin hareket etme sayisi :" + sayac;
-
-       var date = new Date();
-       var time = date.getTime();
-       animate(time, myRectangle, runAnimation, canvas, context);
-      }
-     });
-     drawRect(myRectangle, context);
-     drawRect(myRectangle1, context);
-     drawRect(myRectangle_1, context);
-     drawRect(myRectangle2, context);
-     drawRect(myRectangle_2, context);
-</script>
-</body>
+   <head>
+      <style>
+         body {
+         margin: 0px;
+         padding: 0px;
+         }
+      </style>
+   </head>
+   <body bgcolor="gray">
+      <canvas id="myCanvas" width="978" height="300"></canvas>
+      <h1 id="mySayac"></h1>
+      <script>
+         var canvas = document.getElementById('myCanvas');
+         var context = canvas.getContext('2d');
+         
+         context.font = '20pt Calibri';
+         context.fillStyle = 'white';
+         context.fillText('Araba Hareketi', 250, 30);
+         
+         context.beginPath();
+         context.moveTo(0, 50);
+         context.lineTo(970, 50);
+         context.lineWidth = 5;
+         context.strokeStyle = '#ff9010';
+         context.stroke();
+         var context2 = canvas.getContext('2d');        
+         context2.beginPath();
+         context2.moveTo(0, 250);
+         context2.lineTo(970, 250);
+         context.lineWidth = 5;
+         context2.strokeStyle = '#ff9000';
+         context2.stroke();
+         
+           window.requestAnimFrame = (function(callback) {
+             return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+             function(callback) {
+               window.setTimeout(callback, 1000 / 60);
+              };
+             })();
+         
+            function drawRect(myRectangle, context) {
+                 context.beginPath();
+                 context.rect(myRectangle.x, myRectangle.y, myRectangle.width, myRectangle.height);
+                 context.fillStyle = '#8ED6FF';
+                 context.fill();
+                 context.lineWidth = myRectangle.borderWidth;
+                 context.strokeStyle = 'black';
+                 context.stroke();
+             }
+            function animate(lastTime, myRectangle, runAnimation, canvas, context) {
+                 if(runAnimation.value) {
+         
+                 var time = (new Date()).getTime();
+                 var timeDiff = time - lastTime;
+                 var linearSpeed = 100;
+                 var linearDistEachFrame = linearSpeed * timeDiff / 1000;
+                 var currentX = myRectangle.x;
+                 if(currentX < canvas.width - myRectangle.width - myRectangle.borderWidth / 2) {
+                 var newX = currentX + linearDistEachFrame;
+                 myRectangle.x = newX;
+               }
+             
+                 context.clearRect(0, 0, canvas.width, canvas.height);
+                 drawRect(myRectangle, context);
+                 drawRect(myRectangle1, context);
+                 drawRect(myRectangle_1, context);
+                 drawRect(myRectangle2, context);
+                 drawRect(myRectangle_2, context);
+                 requestAnimFrame(function() {
+                 animate(time, myRectangle, runAnimation, canvas, context);
+              });
+                  
+             }
+           }
+                 var canvas = document.getElementById('myCanvas');
+                 var context = canvas.getContext('2d');        
+                 var myRectangle = {
+                 x: 0,
+                 y: 130,
+                 width: 100,
+                 height: 50,
+                 borderWidth: 5
+                };
+         
+                var myRectangle1 = {
+                  x: 0,
+                  y: 80,
+                  width: 110,
+                  height: 140,
+                  borderWidth: 10
+                };
+         
+               var myRectangle_1 = {
+                  x: 106,
+                  y: 121,
+                  width: 9,
+                  height: 60,
+                  borderWidth: 1
+               };
+         
+               var myRectangle2 = {
+                 x: 860,
+                 y: 80,
+                 width: 110,
+                 height: 140,
+                 borderWidth: 10
+              };
+         
+               var myRectangle_2 = {
+                 x: 854,
+                 y: 121,
+                 width: 9,
+                 height: 60,
+                 borderWidth: 1
+              };
+         
+     
+               var runAnimation = {
+                value: false
+               };   
+               var sayac = 0;
+     
+               document.getElementById('myCanvas').addEventListener('click', function() {
+               runAnimation.value = !runAnimation.value;
+               if(runAnimation.value) {
+                sayac = sayac + 1;
+                document.getElementById("mySayac").innerHTML = "Araba'nin hareket etme sayisi :" + sayac;
+         
+                var date = new Date();
+                var time = date.getTime();
+                animate(time, myRectangle, runAnimation, canvas, context);
+               }
+              });
+              drawRect(myRectangle, context);
+              drawRect(myRectangle1, context);
+              drawRect(myRectangle_1, context);
+              drawRect(myRectangle2, context);
+              drawRect(myRectangle_2, context);
+      </script>
+   </body>
 </html>
